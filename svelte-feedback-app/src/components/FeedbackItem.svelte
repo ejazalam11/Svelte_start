@@ -1,9 +1,9 @@
 <script>
-  import { createEventDispacher } from "svelte";
+  import { createEventDispatcher } from "svelte";
   import Cart from "./Cart.svelte";
   export let item;
 
-  const dispatch = createEventDispacher();
+  const dispatch = createEventDispatcher();
   const handleDelete = (itemId) => {
     dispatch("delete-feedback", itemId);
   };
