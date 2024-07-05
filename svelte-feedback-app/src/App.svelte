@@ -1,4 +1,8 @@
 <script>
+  import { onMount } from "svelte";
+  let posts = [];
+  //   import { Router, Link, Route } from "svelte-routing";
+
   import Feedbacklist from "./components/Feedbacklist.svelte";
   import FeedbackStates from "./components/FeedbackStates.svelte";
   import FeedbackForm from "./components/FeedbackForm.svelte";
@@ -28,14 +32,31 @@
     const itemId = e.detail;
     feedback = feedback.filter((item) => item.id != itemId);
   };
+  onMount(async () => {
+    const data = await fetch("https://jsonplaceholder.typicode.com/posts");
+    posts = await data.json();
+  });
+  let submit = false;
 </script>
 
 <main class="container">
   <FeedbackForm />
   <FeedbackStates {count} {average} />
-  <!-- {average} -->
+  {average}
   <Feedbacklist {feedback} on:delete-feedback={deleteFeedback} />
+  {#each posts as post (post.id)}
+    <h3>{post.id} - {post.title}</h3>
+  {/each}
+
+  <label>
+    <input type="checkbox" bind:checked={submit} />
+    I have Read the arguments!
+    <button type="submit" disabled={!submit}> Submit</button>
+  </label>
 </main>
 
 <style>
+  h3 {
+    color: rgb(35, 33, 33);
+  }
 </style>
