@@ -37,9 +37,22 @@
     posts = await data.json();
   });
   let submit = false;
+  let countt = 0;
+
+  const Clickbtn = () => {
+    countt++;
+  };
+
+  $: if (countt === 2) {
+    alert("You have reached number 2");
+  }
 </script>
 
 <main class="container">
+  <button on:click={Clickbtn} class="btn"
+    >{countt}{countt <= 1 ? "time" : "times"}</button
+  >
+
   <FeedbackForm />
   <FeedbackStates {count} {average} />
   {average}
@@ -58,5 +71,9 @@
 <style>
   h3 {
     color: rgb(35, 33, 33);
+  }
+
+  .btn {
+    padding: 9px;
   }
 </style>
