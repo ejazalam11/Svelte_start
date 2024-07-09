@@ -37,13 +37,13 @@
     posts = await data.json();
   });
   let submit = false;
-  let countt = 0;
+  let countt = 2;
 
   const Clickbtn = () => {
     countt++;
   };
 
-  $: if (countt === 2) {
+  $: if (countt === 3) {
     alert("You have reached number 2");
   }
 </script>
